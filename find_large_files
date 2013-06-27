@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if [ "$1" == "" ]; then
+	echo "usage: find_large_files <filesystem/directory>"
+	exit
+fi
+
+find $1 -type f -size +10000k -exec ls -lh {} \; | awk '{ print $5 ": " $9 }' |sort -rn
